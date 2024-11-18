@@ -1,0 +1,22 @@
+version: '3.7'
+
+name: fullstack-auth
+
+services:
+  redis:
+    container_name: fullstack-redis
+    image: redis:5.0
+    restart: always
+    command: redis-server --requirepass ${REDIS_PASS}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+
+volumes:
+  redis_data:
+
+networks:
+  backend:
